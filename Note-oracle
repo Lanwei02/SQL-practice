@@ -1,0 +1,2 @@
+1. MOD(N, M): The reminder of N/M;
+2. Get the first letter: SUBSTR('ABCDEF', 0, 3) ==> 'ABC'
