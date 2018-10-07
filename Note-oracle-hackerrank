@@ -1,0 +1,15 @@
+1. MOD(N, M): The reminder of N/M;
+
+2. Get the first letter: SUBSTR('ABCDEF', 0, 3) ==> 'ABC';
+
+3. Higher Than 75 Marks:
+Query the Name of any student in STUDENTS who scored higher than 75 Marks. 
+Order your output by the last three characters of each name. 
+If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), 
+secondary sort them by ascending ID.
+SELECT NAME
+FROM (SELECT ID, NAME, SUBSTR(NAME,-3,3) SUBNAME, Marks
+      FROM STUDENTS
+      ORDER BY SUBNAME, ID)
+WHERE Marks > 75;
+
