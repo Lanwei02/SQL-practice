@@ -1,5 +1,6 @@
 1. round(N, D):
 * N: A number which will be rounded upto D decimal places.
+
 2. CASE WHEN ... THEN...    WHEN ... THEN .... ELSE... END
 SELECT CASE WHEN A+B>C AND B+C>A AND A+C>B
 THEN
@@ -8,3 +9,6 @@ THEN
         WHEN A!=B AND B!=C AND C!=A THEN 'Scalene' END
     ELSE 'Not A Triangle' END
 FROM TRIANGLES;
+
+3. Get the average of a variable:
+AVG(cloumn_name)
