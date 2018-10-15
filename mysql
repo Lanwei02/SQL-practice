@@ -42,7 +42,8 @@ GROUP BY RowNumber;
 
 (1) set @r2 = 0    ==> User defined variable;
 (2) The code aggregate rows together using GROUP BY RowNumber and MAX(or Min) statement:
-MIN()/MAX() will return a name for specific index and specific occupation. If there is a name, they wiil return it. If there is not, they will return a NULL.
+MIN()/MAX() will return a name for specific index and specific occupation. If there is a name, they wiil return it. 
+If there is not, they will return a NULL.
 
 
 
