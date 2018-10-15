@@ -61,3 +61,13 @@ SELECT CITY.NAME
 FROM CITY INNER JOIN COUNTRY ON CountryCode = Code
 WHERE CONTINENT = 'Africa';
 
+9. calculate median with mysql: https://www.hackerrank.com/challenges/weather-observation-station-20/problem
+SET @RowNum = 0;
+
+SELECT ROUND(AVG(LAT_N), 4)
+FROM(
+    SELECT LAT_N, @RowNum:=@RowNum+1 AS ROWNUMBER, @Total:=@RowNum
+    FROM STATION
+    WHERE LAT_N IS NOT NULL
+    ORDER BY LAT_N ASC) Temp
+WHERE ROWNUMBER IN (FLOOR((@Total+1)/2), FLOOR((@Total+2)/2));
