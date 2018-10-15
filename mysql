@@ -52,5 +52,12 @@ ELSE 'Leaf' END
 FROM BST
 ORDER BY N ASC;
 
+8. query rows based on the information from two tables:
+SELECT CITY.NAME
+FROM CITY, COUNTRY
+WHERE CITY.CountryCode = COUNTRY.Code AND CONTINENT = 'Africa';
 
+SELECT CITY.NAME
+FROM CITY INNER JOIN COUNTRY ON CountryCode = Code
+WHERE CONTINENT = 'Africa';
 
