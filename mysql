@@ -75,3 +75,10 @@ WHERE ROWNUMBER IN (FLOOR((@Total+1)/2), FLOOR((@Total+2)/2));
 10. REPLACE():
 SELECT CEIL(AVG(Salary)-AVG(REPLACE(Salary,'0',''))) 
 FROM EMPLOYEES;
+
+11. GROUP BY 1
+group by first column from SELECT
+
+12. POWER(4, 2) ==> 4^2
+
+13. SQRT() ==> Return the square root of the argument.
