@@ -106,3 +106,31 @@ WHERE NOT EXISTS(
         information_schema.tables t5
 	    LIMIT 1000) list_of_divisors
 	WHERE MOD(POTENTIAL_PRIME, DIVISOR) = 0 AND POTENTIAL_PRIME <> DIVISOR);
+
+16.
+SELECT hackers.hacker_id, hackers.name
+FROM submissions, hackers, challenges, difficulty
+WHERE submissions.hacker_id = hackers.hacker_id
+AND submissions.challenge_id = challenges.challenge_id
+AND submissions.score = difficulty.score 
+AND challenges.difficulty_level = difficulty.difficulty_level
+GROUP BY hackers.hacker_id, hackers.name
+HAVING COUNT(hackers.hacker_id) > 1
+ORDER BY COUNT(submissions.hacker_id) DESC, submissions.hacker_id ASC;
+
+17. pay attention to the useage of 'having'
+select challenges.hacker_id, hackers.name, count(challenges.hacker_id) as total
+from hackers, challenges
+where hackers.hacker_id = challenges.hacker_id
+group by challenges.hacker_id, hackers.name
+having total = (select max(total_count)
+               from (select count(challenge_id) as total_count
+                    from challenges
+                    group by hacker_id) max_total)
+or total in (select * from (select count(challenge_id) as total_count
+                    from challenges
+                    group by hacker_id )temp
+            group by total_count
+            having count(total_count)=1) 
+order by total desc, hacker_id;
+                        
