@@ -147,3 +147,24 @@ and wands.coins_needed = temp.min_coins_needed
 and wands.code = wands_property.code
 and temp.age = wands_property.age
 order by temp.power desc, temp.age desc;
+
+19. Contest Leaderboard
+select temp.hacker_id, hackers.name, sum(temp.max_score) as total_score
+from hackers, (
+    select hacker_id, challenge_id, max(score) as max_score
+    from Submissions
+    group by hacker_id, challenge_id
+    having max(score) > 0) temp
+where temp.hacker_id = hackers.hacker_id
+group by temp.hacker_id, hackers.name
+order by total_score desc, hacker_id asc;
+
+20. Projects:
+https://www.hackerrank.com/challenges/projects/problem
+SELECT start_date, MIN(end_date)
+FROM 
+    (SELECT start_date FROM PROJECTS WHERE start_date NOT IN (SELECT end_date FROM PROJECTS)) a,
+    (SELECT end_date FROM PROJECTS WHERE end_date NOT IN (SELECT start_date FROM PROJECTS)) b
+where start_date < end_date
+GROUP BY start_date
+ORDER BY DATEDIFF(MIN(end_date), start_date), start_date
