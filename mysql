@@ -107,7 +107,7 @@ WHERE NOT EXISTS(
 	    LIMIT 1000) list_of_divisors
 	WHERE MOD(POTENTIAL_PRIME, DIVISOR) = 0 AND POTENTIAL_PRIME <> DIVISOR);
 
-16.
+16. pay attention to the useage of 'having':
 SELECT hackers.hacker_id, hackers.name
 FROM submissions, hackers, challenges, difficulty
 WHERE submissions.hacker_id = hackers.hacker_id
@@ -118,7 +118,7 @@ GROUP BY hackers.hacker_id, hackers.name
 HAVING COUNT(hackers.hacker_id) > 1
 ORDER BY COUNT(submissions.hacker_id) DESC, submissions.hacker_id ASC;
 
-17. pay attention to the useage of 'having'
+17. pay attention to the useage of 'having':
 select challenges.hacker_id, hackers.name, count(challenges.hacker_id) as total
 from hackers, challenges
 where hackers.hacker_id = challenges.hacker_id
