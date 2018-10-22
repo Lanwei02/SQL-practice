@@ -134,3 +134,16 @@ or total in (select * from (select count(challenge_id) as total_count
             having count(total_count)=1) 
 order by total desc, hacker_id;
                         
+18.
+select wands.id, temp.age, temp.min_coins_needed, temp.power
+from wands, wands_property, 
+(select wands_property.age, min(wands.coins_needed) as min_coins_needed, wands.power
+from wands, wands_property 
+where wands.code = wands_property.code
+and wands_property.is_evil != 1
+group by wands_property.age, wands.power) temp
+where temp.power = wands.power 
+and wands.coins_needed = temp.min_coins_needed
+and wands.code = wands_property.code
+and temp.age = wands_property.age
+order by temp.power desc, temp.age desc;
