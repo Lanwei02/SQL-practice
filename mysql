@@ -168,3 +168,26 @@ FROM
 where start_date < end_date
 GROUP BY start_date
 ORDER BY DATEDIFF(MIN(end_date), start_date), start_date
+
+21.Draw The Triangle 1:
+https://www.hackerrank.com/challenges/draw-the-triangle-1/problem
+* * * * * 
+* * * * 
+* * * 
+* * 
+*
+set @NUMBER:=21; 
+SELECT REPEAT('* ', @NUMBER := @NUMBER - 1) 
+FROM information_schema.tables;
+
+22.Draw The Triangle 2:
+https://www.hackerrank.com/challenges/draw-the-triangle-2/problem?h_r=next-challenge&h_v=zen
+* 
+* * 
+* * * 
+* * * * 
+* * * * *
+set @number := 0;
+select repeat('* ', @number := @number + 1) 
+from information_schema.tables 
+where @number < 20;
