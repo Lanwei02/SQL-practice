@@ -191,3 +191,13 @@ set @number := 0;
 select repeat('* ', @number := @number + 1) 
 from information_schema.tables 
 where @number < 20;
+
+23. Placements:
+https://www.hackerrank.com/challenges/placements/problem
+select temp.me_name
+from(select a.Name as me_name, c.Salary as me_salary, b.Name as friend_name, d.Salary as friend_salary
+from students a, students b, friends, packages c, packages d
+where a.ID = friends.ID and b.ID = friends.Friend_ID
+and c.ID = friends.ID and d.ID = friends.Friend_ID) temp
+where temp.friend_salary > temp.me_salary
+order by temp.friend_salary;
