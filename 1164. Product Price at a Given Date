@@ -1,0 +1,12 @@
+# Write your MySQL query statement below
+select p.product_id,
+case when temp.r = 1 then temp.new_price
+else 10 end as price
+from (select distinct product_id from Products) as p
+left join 
+(SELECT p.*, row_number() over (partition by product_id order by change_date desc) as r
+FROM Products as p
+where change_date <= '2019-08-16') temp
+on p.product_id = temp.product_id
+#and p.change_date = temp.change_date
+and temp.r = 1
