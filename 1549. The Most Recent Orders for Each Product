@@ -1,0 +1,17 @@
+# Write your MySQL query statement below
+SELECT P.product_name AS product_name
+, temp.product_id as product_id
+, temp.order_id as order_id
+, temp.order_date as order_date
+FROM 
+(
+    SELECT product_id
+    , order_id
+    , order_date
+    , RANK() OVER (PARTITION BY product_id ORDER BY order_date DESC) AS order_date_r
+    FROM Orders
+) temp
+JOIN Products AS P
+ON P.product_id = temp.product_id
+WHERE order_date_r = 1
+ORDER BY P.product_name, temp.product_id, temp.order_id 
