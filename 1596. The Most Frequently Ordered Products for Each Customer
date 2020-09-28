@@ -1,0 +1,22 @@
+SELECT DISTINCT temp2.customer_id AS customer_id
+, temp2.product_id AS product_id
+, Products.product_name AS product_name
+FROM
+(
+    select customer_id
+    , product_id
+    , RANK() OVER (PARTITION BY customer_id ORDER BY C DESC) AS C2
+    from
+(
+        select customer_id
+        , product_id
+        , COUNT(product_id) OVER(PARTITION BY customer_id, product_id) AS C
+        from Orders
+        ORDER BY customer_id, C DESC
+) 
+    temp
+) 
+temp2
+JOIN Products
+ON Products.product_id = temp2.product_id
+WHERE C2 = 1
