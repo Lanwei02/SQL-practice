@@ -1,0 +1,35 @@
+# The SUBSTRING_INDEX() function returns a substring from a string before a specified number of occurrences of the delimiter.
+
+# # Write your MySQL query statement below
+SELECT country_name AS country 
+#, AVG(duration)
+FROM
+(
+    SELECT caller.country_name as country_name
+    , ER.duration AS duration
+    FROM Calls AS ER
+    JOIN (
+        SELECT P.id AS p_id
+        , C.name AS country_name
+        FROM Person AS P
+        JOIN Country AS C
+        ON C.country_code = SUBSTRING_INDEX(P.phone_number, '-', 1)
+        ) AS caller
+    ON ER.caller_id = caller.p_id
+    UNION ALL
+    SELECT callee.country_name as country_name
+    , ER.duration AS duration
+    FROM Calls AS ER
+    JOIN (
+        SELECT P.id AS p_id
+        , C.name AS country_name
+        FROM Person AS P
+        JOIN Country AS C
+        ON C.country_code = SUBSTRING_INDEX(P.phone_number, '-', 1)
+        ) AS callee
+    ON ER.callee_id = callee.p_id
+) temp
+GROUP BY country_name
+HAVING AVG(duration) > (select AVG(duration) FROM Calls)
+
+
